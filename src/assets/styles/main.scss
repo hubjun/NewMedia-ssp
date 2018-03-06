@@ -1,0 +1,182 @@
+body {
+  padding: 0px;
+  margin: 0px auto;
+}
+a {
+  text-decoration: none;
+}
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  color: #2c3e50;
+}
+.el-dialog__header {
+  padding: 20px;
+  background: #E5E9F2;
+}
+//home.vue
+.el-menu-item, .el-submenu__title {
+  color: #fff;
+}
+.el-menu .el-menu-item, .el-submenu .el-submenu__title {
+  height: 46px;
+  line-height: 46px;
+}
+.el-menu-item:hover, .el-submenu .el-menu-item:hover, .el-submenu__title:hover {
+  background-color: #7ed2df;
+}
+.el-submenu .el-menu-item {
+  background-color: #333744
+}
+.el-submenu .el-menu-item:hover {
+  background-color: #4A5064
+}
+.el-submenu .el-menu-item.is-active, .el-menu-item.is-active,
+.el-submenu .el-menu-item.is-active:hover, .el-menu-item.is-active:hover {
+  background-color: #00C1DE;
+  color: #fff;
+}
+.el-menu .iconfont {
+  vertical-align: baseline;
+  margin-right: 6px;
+}
+.warp-breadcrum{
+  margin: 5px 10px 15px 0px;
+}
+//头像上传
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+.el-dialog__wrapper{
+  z-index: 9999;
+}
+//input line-height
+.el-form-item__content{
+  line-height: normal !important;
+  //修改文案内容 图片tips被遮羞
+  //position: static;
+}
+.el-select{
+  margin-right: 5px;
+}
+.topButtonWarp{
+  margin: 10px 0 0;
+}
+//filters item title
+.toolbar{
+  .title{
+    font-size: 14px;
+  }
+  margin: 20px 0 15px;
+  .el-form-item{
+    margin-bottom: 0;
+  }
+}
+//fixed bug for element-ui select
+.el-select-dropdown__item.selected{
+  background-color: #fff !important;
+}
+.el-select-dropdown__item.selected.hover{
+  background-color: #f5f7fa !important;
+}
+.el-select-dropdown__item.selected{
+  color: #409eff;
+  font-weight: 700;
+}
+//tables el-pagination page-size
+.el-pagination{
+  text-align: center;
+  padding-top: 20px;
+  .el-select .el-input .el-input__icon{
+    top: 0 !important;
+  }
+}
+.elPagination{
+  margin: 15px 0;
+  text-align: center;
+}
+//popover
+.el-popover {
+  height: 100%;
+  width: 70% !important;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+.popTop{
+  padding: 12px 20px;
+  background: #E5E9F2;
+}
+.popTop .title{
+  font-size: 16px;
+  color: #1f2d3d;
+  font-weight: 600;
+}
+.popTop .close{
+  float: right;
+  margin-top: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+//ToolTip
+.el-tooltip__popper{
+  max-width: 55%;
+  //width: auto;
+  padding: 10px;
+}
+.el-tooltip__popper.is-light{
+  border:1px solid #E5E9F2;
+}
+ul.checkMessage {
+  width: 92%;
+  height: auto;
+  margin: 0 auto;
+  overflow: hidden;
+  font-size: 16px;
+  color: #333;
+  font-family: '微软雅黑';
+  padding: 20px 0;
+}
+ul.checkMessage li {
+  list-style: none;
+  width: 100%;
+  float: left;
+  //height: 30px;
+  line-height: 30px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+ul.checkMessage li span {
+  width: 100px;
+  display: inline-block;
+  padding-right: 10px;
+  text-align: left;
+  vertical-align: top;
+  color: #888;
+}
+
