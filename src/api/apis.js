@@ -102,5 +102,18 @@ export default {
   },
   financeWithdrawLs: params => {
     return API.POST('/starMedia/finance/withdrawList', params)
+  },
+  msgList: params => {
+    return API.POST('/starMedia/message/list', params)
+  },
+  msgDetails: params => {
+    return API.POST('/starMedia/message/details', params)
+  },
+  msgDel: params => {
+    return API.POST('/starMedia/message/delete', params)
+  },
+  msgNolook: params => {
+    return API.POST('/starMedia/message/noLook', params)
   }
+
 }

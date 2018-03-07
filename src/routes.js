@@ -9,6 +9,7 @@ import FollowUp from '@/components/toptask/followUp'
 import UserChangePwd from '@/components/user/changepwd'
 import UserProfile from '@/components/user/profile'
 import regis from '@/components/register'
+import MsgList from '@/components/user/message'
 
 //懒加载方式，当路由被访问的时候才加载对应组件
 const Login = resolve => require(['@/components/Login'], resolve)
@@ -81,12 +82,13 @@ let router = new Router({
     {
       path: '/',
       component: Home,
-      name: '设置',
+      name: '账户与设置',
       menuShow: true,
       iconCls: 'iconfont icon-setting1',
       children: [
         {path: '/user/profile', component: UserProfile, name: '个人信息', menuShow: true},
-        {path: '/user/changepwd', component: UserChangePwd, name: '修改密码', menuShow: true}
+        {path: '/user/changepwd', component: UserChangePwd, name: '修改密码', menuShow: true},
+        {path: '/user/message', component: MsgList, name: '消息列表', menuShow: true}
       ]
     }
   ]

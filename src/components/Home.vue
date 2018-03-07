@@ -12,12 +12,18 @@
         </a>
       </div>
       <div class="topbar-title">
-        <span style="font-size: 18px;color: #fff;">星媒体平台V1.0</span>
+        <span style="font-size: 16px;color: #fff;">星媒体平台V1.0</span>
       </div>
       <div class="topbar-account topbar-btn">
+        <!--<i class="el-icon-message"></i>-->
+        <el-badge :value="totals" :max="99" @click="toMsg" class="item message-count">
+          <i @click="toMsg" class="el-icon-message"></i>
+        </el-badge>
         <el-dropdown trigger="click">
-          <span class="el-dropdown-link userinfo-inner"><i class="iconfont icon-user"></i> 欢迎，{{nickname}}  <i
-            class="iconfont icon-down"></i></span>
+          <span class="el-dropdown-link userinfo-inner">
+            <i class="iconfont icon-user"></i>
+            欢迎，{{nickname}}  <i class="iconfont icon-down"></i>
+          </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
               <router-link to="/user/profile"><span style="color: #555;font-size: 14px;">个人信息</span></router-link>
@@ -73,13 +79,15 @@
 <script>
   import {bus} from '../bus.js'
   import API from '../api/apis';
-
   export default {
     name: 'home',
     created(){
-      bus.$on('setNickName', (text) => {
-        this.nickname = text;
-      })
+      //bus.$on('setNickName', (text) => {
+       // this.nickname = text;
+      //}),
+      bus.$on('totalCounts', (value) => {
+        this.totals = value;
+      }),
       bus.$on('goto', (url) => {
         if (url === "/login") {
           sessionStorage.removeItem('access-user');
@@ -91,12 +99,10 @@
       return {
         nickname: '',
         collapsed: false,
+        totals: ''
       }
     },
     methods: {
-      handleOpen() {
-        //console.log('handleopen');
-      },
       handleClose() {
         //console.log('handleclose');
       },
@@ -107,6 +113,30 @@
       showMenu(i, status){
         this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none';
       },
+      //进入消息
+      toMsg: function() {
+        //console.log(5555);
+        let _this = this;
+        _this.$router.push('/user/message');
+      },
+
+      messageCount(){
+        let that = this;
+        let users = JSON.parse(window.sessionStorage.getItem('access-user'));
+        let params ={
+          user_id: users.user_id,
+          token: users.token
+        };
+        API.msgNolook(params).then((rs) => {
+          //console.log(rs);
+          if(rs.code === 0){
+            that.totals = rs.data.total;
+          }else{
+            this.$message({message:rs.msg, type:'warning', duration: '4000'})
+          }
+        }).catch(() => {})
+      },
+
       logout(){
         let that = this;
         this.$confirm('确认要退出系统吗?', '提示', {type: 'warning',
@@ -136,6 +166,7 @@
         user = JSON.parse(user);
         this.nickname = user.username || '';
       }
+      this.messageCount();
     }
   }
 </script>
@@ -146,7 +177,6 @@
     top: 0px;
     bottom: 0px;
     width: 100%;
-
     .topbar-wrap {
       height: 50px;
       line-height: 50px;
@@ -192,6 +222,20 @@
         float: right;
         padding-right: 24px;
       }
+      .message-count{
+        line-height: normal;
+        margin: 0 5px 3px 0;
+        /*.el-badge__content{*/
+        /*top: 20px !important;*/
+        /*right: 21px !important;*/
+        /*}*/
+        i{
+          font-size: 18px;
+          padding-right: 3px;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
       .userinfo-inner {
         cursor: pointer;
         color: #fff;
@@ -208,7 +252,6 @@
       bottom: 0px;
       overflow: hidden;
     }
-
     aside {
       min-width: 50px;
       background: #333744;
