@@ -1,5 +1,11 @@
 <template>
     <div class="message">
+      <el-col :span="24" class="warp-breadcrum">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item><b>账户设置</b></el-breadcrumb-item>
+          <el-breadcrumb-item>系统消息</el-breadcrumb-item>
+        </el-breadcrumb>
+      </el-col>
       <el-table :data="lists" v-loading="listLoading" stripe border style="width:100%;">
         <el-table-column type="index" label="序号" width="70"></el-table-column>
         <el-table-column prop="title" label="消息标题">

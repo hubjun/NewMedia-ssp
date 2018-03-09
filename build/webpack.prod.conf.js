@@ -9,6 +9,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
+var ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+
 var env = config.build.env
 
 var webpackConfig = merge(baseWebpackConfig, {
@@ -31,9 +34,11 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
+        warnings: false,
+        drop_console: true,
+        pure_funcs: ['console.log']
       },
-      sourceMap: true
+      sourceMap: false
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -83,6 +88,20 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
+
+    // new webpack.optimize.ModuleConcatenationPlugin(),
+    new ParallelUglifyPlugin({
+      cacheDir: '.cache/',
+      uglifyJS:{
+        output: {
+          comments: false
+        },
+        compress: {
+          warnings: false
+        }
+      }
+    }),
+    //拷贝静态文件,提前构建好的包，同步到 dist 中
     // copy custom static assets
     new CopyWebpackPlugin([
       {

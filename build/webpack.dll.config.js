@@ -20,12 +20,10 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false,
-        drop_console: true,
-        pure_funcs: ['console.log']
+        warnings: false
       },
-      sourceMap: false
-    })
+      sourceMap: true
+    }),
   ]
 }
 

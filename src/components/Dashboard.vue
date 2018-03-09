@@ -34,8 +34,6 @@
 </template>
 
 <script>
-  //"echarts": "^3.7.1",700+ kb
-  //import echarts from 'echarts'
   export default {
     data() {
       return {
