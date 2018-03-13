@@ -29,9 +29,12 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
+    // 定义全局变量
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    // 将代码中有重复的依赖包去重
+    //new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -41,6 +44,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       sourceMap: false
     }),
     // extract css into its own file
+    // css 代码分离
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css')
     }),
@@ -54,25 +58,29 @@ var webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
+    // 自动生成一个 index.html 文件
     new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.html',
       inject: true,
       minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeComments: true,         // 删除html中的注释代码
+        collapseWhitespace: true,     // 删除html中的空白符
+        removeAttributeQuotes: true   // 删除html元素中属性的引号
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      //必须通过 CommonsChunkPlugin 的依赖关系自动添加 js，css
       chunksSortMode: 'dependency'
     }),
     // split vendor js into its own file
+    // 公共代码分离打包
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {
         // any required modules inside node_modules are extracted to vendor
+        // 该配置假定你引入的存在于 node_modules 目录中
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
@@ -84,6 +92,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
+    //为了避免vendor.*.js的hash值发生改变需要输出一个manifest.*.js文件
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']

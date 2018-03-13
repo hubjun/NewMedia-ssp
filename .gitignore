@@ -4,7 +4,7 @@ node_modules/
 .idea/
 dist/
 online/
-test/
+testing/
 server/
 npm-debug.log*
 yarn-debug.log*
